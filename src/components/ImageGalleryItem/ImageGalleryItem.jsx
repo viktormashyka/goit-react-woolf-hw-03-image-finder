@@ -1,27 +1,40 @@
 import { Component } from 'react';
 import css from './ImageGalleryItem.module.css';
 
-// import * as basicLightbox from 'basiclightbox';
+import { Modal } from 'components/Modal/Modal';
 
 export class ImageGalleryItem extends Component {
-  // showModal(url)=>{ }
+  state = {
+    isModal: false,
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({ isModal: !prevState.isModal }));
+  };
 
   render() {
     const { image } = this.props;
     return (
-      <li className={css.ImageGalleryItem} key={image.id}>
-        <img
-          className={css.ImageGalleryItemImage}
-          src={image.webformatURL}
-          alt={image.tags}
-        />
-      </li>
+      <>
+        <li
+          className={css.ImageGalleryItem}
+          key={image.id}
+          onClick={this.toggleModal}
+        >
+          <img
+            className={css.ImageGalleryItemImage}
+            src={image.webformatURL}
+            alt={image.tags}
+          />
+        </li>
+        {this.state.isModal && (
+          <Modal
+            largeImageURL={image.largeImageURL}
+            tags={image.tags}
+            toggleModal={this.toggleModal}
+          />
+        )}
+      </>
     );
   }
 }
-
-// const instance = basicLightbox.create(`
-//     <img src="assets/images/image.png" width="800" height="600">
-// `);
-
-// instance.show();

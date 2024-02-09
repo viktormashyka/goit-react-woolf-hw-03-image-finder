@@ -1,21 +1,12 @@
 import css from './Modal.module.css';
+import emptyThumbnail from '../../images/empty-thumbnail.png';
 
-export const Modal = () => {
+export const Modal = ({ largeImageURL, tags, toggleModal }) => {
   return (
-    <div className={css.Overlay}>
+    <div className={css.Overlay} onClick={toggleModal}>
       <div className={css.Modal}>
-        <img src="" alt="" />
+        <img src={largeImageURL ? largeImageURL : emptyThumbnail} alt={tags} />
       </div>
     </div>
   );
 };
-
-// TODO: add lib
-
-// import * as basicLightbox from 'basiclightbox';
-
-// const instance = basicLightbox.create(`
-//     <img src="assets/images/image.png" width="800" height="600">
-// `);
-
-// instance.show();
