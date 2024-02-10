@@ -57,10 +57,6 @@ class App extends Component {
   }
 
   onSubmit = search => {
-    if (search.trim() === '') {
-      toast.info('Please, enter a request');
-      return;
-    }
     this.setState({ query: search, page: 1, images: [] });
   };
 
